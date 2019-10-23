@@ -1,0 +1,44 @@
+<body>
+
+
+  <div class="container">
+    <div class="wrapper">
+      <div class="header">Test AJAX page</div>
+      <button class="button" onclick="loadData()">Load Some JSON</button>
+      <div class="content"></div>
+      <div class="footer"></div>
+    </div>
+  </div>
+
+  <script>
+    function loadData() {
+      fetch('ajax_sample.json')
+        .then(res => res.json())
+        .then(res => res.map(c => c))
+        .then(res => {
+          let ul = document.createElement("ol");
+          let codes = document.querySelector(".content");
+          codes.innerHTML = '';
+          for (let i = 0; i < 15; i++) {
+            let randomNum = Math.floor(Math.random() * Math.floor(res.length-i));
+            let names = res.map((randomNum) => randomNum.name);
+            let li = document.createElement("LI");
+            let text = document.createTextNode(res[randomNum].code + " : " + res[randomNum].name);
+            li.append(text);
+            ul.append(li);
+          }
+          
+          codes.append(ul);
+          return codes;
+        })
+        
+        .then(li => document.createElement("li"))
+    }
+  
+  </script>
+
+
+
+</body>
+
+</html>
