@@ -21,11 +21,40 @@
       fetch('/api')
         .then(res => res.json())
         .then(res => {
-          console.log(res); // logging step to check what we got
+          //console.log(res); // logging step to check what we got
+          let ol = document.createElement("ol");
+          let codes = document.querySelector(".content");
+          codes.innerHTML = '';
+          console.log(res);
+
+          
+          for (var i in res) {
+            console.log(res[i]);
+            for (const [key, value] of Object.entries(res[i])) {
+              console.log(key);
+              let li = document.createElement("li");
+              let text = document.createTextNode(key);
+
+              let text2 = document.createTextNode(value);
+
+              li.append(text);
+
+              li.append(": ");
+
+              li.append(text2);
+
+              ol.append(li);
+            }
+          }
+          
+          
+          codes.append(ol);
+          
           return res;
-        })
-        .then(res => res.data.map(c => c.route_id))
-        .then(codes => document.querySelector(".content").innerText = codes);
+
+        });
+        //.then(res => res.data.map(c => c.route_id))
+        //.then(codes => document.querySelector(".content").innerText = codes);
     }
   </script>
 </body>
